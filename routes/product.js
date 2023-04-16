@@ -67,18 +67,18 @@ router.get("/", async (req, res) => {
     let product;
 
     if (qNew) {
-      products = await Product.find().sort({ createAt: -1 }).limit(5);
+      product = await Product.find().sort({ createAt: -1 }).limit(5);
     } else if (qCategory) {
-      products = await Product.find({
+      product = await Product.find({
         categories: {
           $in: [qCategory],
         },
       });
     } else {
-      products = await Product.find();
+      product = await Product.find();
     }
 
-    res.status(200).json(products);
+    res.status(200).json(product);
   } catch (err) {
     res.status(500).json(err);
   }
